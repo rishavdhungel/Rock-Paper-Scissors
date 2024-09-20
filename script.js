@@ -13,8 +13,7 @@ function getComputerChoice(){
 
 //get human choice using prompt
 function getHumanChoice(){
-    let humanchoice = prompt("Select 'scissor' 'paper' or 'rock");
-    return humanchoice.toLocaleLowerCase();
+
 }
 
 
