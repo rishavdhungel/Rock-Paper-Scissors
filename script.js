@@ -3,6 +3,7 @@ const choice = ['scissor','paper','rock'];
 
 let playerScore = 0;
 let computerScore = 0;
+let tieScore = 0;
 let round = 0;
 
 //event listner
@@ -10,6 +11,7 @@ const imageButtons = document.querySelectorAll("img");
 const playerScoreCard = document.querySelector("#playerScore");
 const computerScoreCard = document.querySelector("#computerScore");
 const roundDisplay = document.querySelector("#round");
+const tieDisplay  = document.querySelector("#tieScore");
 
 
 function getComputerChoice(){
@@ -21,14 +23,17 @@ function updateScore(){
     playerScoreCard.textContent = `Player: ${playerScore}`;
     computerScoreCard.textContent = `Computer: ${computerScore}`;
     roundDisplay.textContent = `Round: ${round}`;
+    tieDisplay.textContent = `Tie: ${tieScore}`;
 }
 
 function playRound(humanSelection){
     
     let computerSelection = getComputerChoice();
     round++;
-
-    if (humanSelection === 'paper'){
+    if (humanSelection === computerSelection){
+        tieScore++;
+    }
+    else if (humanSelection === 'paper'){
         if (computerSelection === 'scissor'){
             computerScore++;
         }else{
@@ -51,7 +56,11 @@ function playRound(humanSelection){
     }
     updateScore();
 
-    if (playerScore === 3 || computerScore === 3 || round ===5){
+
+
+
+    // End the game if one player reaches 3 points or after 5 rounds
+    if (playerScore === 3 || computerScore === 3 || round === 5) {
         declareWinner();
     }
 }
@@ -61,7 +70,7 @@ function declareWinner(){
         alert("Player Wins!");
     }
     else if(computerScore > playerScore){
-        alert("Player Wins")
+        alert("Computer Wins")
     }else{
         alert("It's a tie overall");
     }
@@ -72,6 +81,7 @@ function declareWinner(){
     playerScore = 0;
     computerScore = 0;
     round = 0;
+    tieScore = 0;
     updateScore();
 }
 
